@@ -68,4 +68,20 @@ const updateUserById = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUser, updateUserById };
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const deletUSer = await User.findByIdAndDelete(userId);
+    if (!deletUSer) {
+      return res.status(404).json({ status: "Failed", msg: "User not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ status: "Success", msg: "Deleted Successfully..." });
+  } catch (error) {
+    return res.status(500).json({ status: "Failed", error });
+  }
+};
+
+module.exports = { createUser, getUser, updateUserById, deleteUser };

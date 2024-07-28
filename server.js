@@ -3,11 +3,17 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectMongoDb = require("./config/db");
 const router = require("./route/authRoute");
+const cors = require("cors");
 
 dotenv.config();
 const PORT = process.env.PORT;
 
 const app = express();
+app.use(
+  cors({
+    origin: "https://crud-frontend-sage.vercel.app/", // Replace with your frontend URL
+  })
+);
 app.use(express.json());
 app.use(cors());
 
